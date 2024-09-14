@@ -5,8 +5,10 @@ import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
+@Setter
 @Table(name = "store")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Store {
@@ -15,24 +17,26 @@ public class Store {
     @Column(name = "store_id", nullable = false)
     private Long id;
 
-    private String store_name;
+    private String storeName;
 
     private Float grade;
 
-    private Long delivery_tip;
-    private String menu_name;
-    private Long menu_price;
+    private Long deliveryTip;
+    private String menuName;
+    private Long menuPrice;
 
     @Enumerated(EnumType.STRING)
     private StoreCategory category;
 
     @Builder
-    public Store(String store_name, Long delivery_tip, String menu_name, Long menu_price, StoreCategory category){
-        this.store_name = store_name;
-        this.delivery_tip=delivery_tip;
-        this.menu_name=menu_name;
-        this.menu_price=menu_price;
+    public Store(String storeName, Long deliveryTip, String menuName, Long menuPrice, StoreCategory category){
+        this.storeName = storeName;
+        this.deliveryTip=deliveryTip;
+        this.menuName=menuName;
+        this.menuPrice=menuPrice;
         this.category = category;
         this.grade = 0F;
     }
+
+
 }
