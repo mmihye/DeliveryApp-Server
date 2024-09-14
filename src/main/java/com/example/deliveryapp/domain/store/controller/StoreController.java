@@ -15,6 +15,14 @@ public class StoreController {
 
     private final StoreService storeService;
 
+    @GetMapping("/{storeId}")
+    public ApiResponse<?> getStore(
+            @PathVariable Long storeId
+    ){
+
+        return ApiResponse.success(Success.GET_STORE_SUCCESS, storeService.getStore(storeId));
+    }
+
     @PostMapping("")
     public ApiResponse<?> createStore(
             @RequestBody CreateStoreReq createStoreReq

@@ -1,6 +1,7 @@
 package com.example.deliveryapp.domain.store.service;
 
 import com.example.deliveryapp.domain.store.dto.CreateStoreReq;
+import com.example.deliveryapp.domain.store.dto.GetStoreRes;
 import com.example.deliveryapp.domain.store.entity.Store;
 import com.example.deliveryapp.domain.store.enumerate.StoreCategory;
 import com.example.deliveryapp.domain.store.repository.StoreRepository;
@@ -28,7 +29,7 @@ public class StoreService {
 
     @Transactional
     public void updateStore(Long storeId, String storeName, Long deliveryTip, Long menuPrice, String menuName, StoreCategory category) {
-        Store store = getStoreFomRepo(storeId);
+        Store store = getStoreFromRepo(storeId);
 
         if(storeName != null)
             store.setStoreName(storeName);
@@ -43,10 +44,16 @@ public class StoreService {
     }
     @Transactional
     public void deleteStore(Long storeId) {
-        storeRepository.delete(getStoreFomRepo(storeId));
+        storeRepository.delete(getStoreFromRepo(storeId));
     }
 
-    private Store getStoreFomRepo(Long storeId){
+
+    public GetStoreRes getStore(Long storeId) {
+        return GetStoreRes.of(getStoreFromRepo(storeId));
+    }
+
+
+    private Store getStoreFromRepo(Long storeId){
         return storeRepository.findById(storeId).orElseThrow(
                 () -> new ApplicationException(ErrorCode.NOT_FOUND_STORE_EXCEPTION)
         );

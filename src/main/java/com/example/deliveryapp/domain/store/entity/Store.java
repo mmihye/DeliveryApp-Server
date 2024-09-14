@@ -2,13 +2,11 @@ package com.example.deliveryapp.domain.store.entity;
 
 import com.example.deliveryapp.domain.store.enumerate.StoreCategory;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Setter
+@Getter
 @Table(name = "store")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Store {
