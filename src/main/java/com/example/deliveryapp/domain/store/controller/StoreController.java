@@ -35,4 +35,12 @@ public class StoreController {
         storeService.updateStore(storeId,storeName,deliveryTip,menuPrice,menuName,category);
         return ApiResponse.success(Success.UPDATE_STORE_SUCCESS);
     }
+
+    @DeleteMapping("/{storeId}")
+    public ApiResponse<?> deleteStore(
+            @PathVariable Long storeId
+    ){
+        storeService.deleteStore(storeId);
+        return ApiResponse.success(Success.DELETE_STORE_SUCCESS);
+    }
 }

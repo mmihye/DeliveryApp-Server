@@ -28,9 +28,7 @@ public class StoreService {
 
     @Transactional
     public void updateStore(Long storeId, String storeName, Long deliveryTip, Long menuPrice, String menuName, StoreCategory category) {
-        Store store = storeRepository.findById(storeId).orElseThrow(
-                () -> new ApplicationException(ErrorCode.NOT_FOUND_STORE_EXCEPTION)
-        );
+        Store store = getStore(storeId);
 
         if(storeName != null)
             store.setStoreName(storeName);
@@ -43,5 +41,14 @@ public class StoreService {
         if(category != null)
             store.setCategory(category);
     }
+    @Transactional
+    public void deleteStore(Long storeId) {
+        storeRepository.delete(getStore(storeId));
+    }
 
+    private Store getStore(Long storeId){
+        return storeRepository.findById(storeId).orElseThrow(
+                () -> new ApplicationException(ErrorCode.NOT_FOUND_STORE_EXCEPTION)
+        );
+    }
 }

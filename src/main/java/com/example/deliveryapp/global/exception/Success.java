@@ -17,7 +17,8 @@ public enum Success {
     /**
      * 200 OK
      */
-    UPDATE_STORE_SUCCESS(HttpStatus.OK, "가게 정보 수정 성공");
+    UPDATE_STORE_SUCCESS(HttpStatus.OK, "가게 정보 수정 성공"),
+    DELETE_STORE_SUCCESS(HttpStatus.OK, "가게 삭제 성공");
 
 
     /**
