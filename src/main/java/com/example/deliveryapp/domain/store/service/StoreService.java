@@ -28,7 +28,7 @@ public class StoreService {
 
     @Transactional
     public void updateStore(Long storeId, String storeName, Long deliveryTip, Long menuPrice, String menuName, StoreCategory category) {
-        Store store = getStore(storeId);
+        Store store = getStoreFomRepo(storeId);
 
         if(storeName != null)
             store.setStoreName(storeName);
@@ -43,10 +43,10 @@ public class StoreService {
     }
     @Transactional
     public void deleteStore(Long storeId) {
-        storeRepository.delete(getStore(storeId));
+        storeRepository.delete(getStoreFomRepo(storeId));
     }
 
-    private Store getStore(Long storeId){
+    private Store getStoreFomRepo(Long storeId){
         return storeRepository.findById(storeId).orElseThrow(
                 () -> new ApplicationException(ErrorCode.NOT_FOUND_STORE_EXCEPTION)
         );
