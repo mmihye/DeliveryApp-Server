@@ -3,7 +3,7 @@ package com.example.deliveryapp.domain.store.dto;
 import com.example.deliveryapp.domain.store.entity.Store;
 import com.example.deliveryapp.domain.store.enumerate.StoreCategory;
 
-public record GetStoreRes(
+public record StoreRes(
         Long storeId,
 
         String storeName,
@@ -13,7 +13,7 @@ public record GetStoreRes(
         Long menuPrice,
         StoreCategory category
 ) {
-    public static GetStoreRes of(Store store){
-        return new GetStoreRes(store.getId(), store.getStoreName(), store.getGrade(), store.getDeliveryTip(), store.getMenuName(), store.getMenuPrice(), store.getCategory());
+    public static StoreRes of(Store store){
+        return new StoreRes(store.getId(), store.getStoreName(), store.getGrade(), store.getDeliveryTip(), store.getMenuName(), store.getMenuPrice(), store.getCategory());
     }
 }

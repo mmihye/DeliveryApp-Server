@@ -19,7 +19,8 @@ public enum Success {
      */
     UPDATE_STORE_SUCCESS(HttpStatus.OK, "가게 정보 수정 성공"),
     DELETE_STORE_SUCCESS(HttpStatus.OK, "가게 삭제 성공"),
-    GET_STORE_SUCCESS(HttpStatus.OK,"가게 조회 성공");
+    GET_STORE_LIST_SUCCESS(HttpStatus.OK,"가게 리스트 조회 성공"),
+    GET_STORE_SUCCESS(HttpStatus.OK,"가게 단건 조회 성공");
 
 
     /**

@@ -1,11 +1,15 @@
 package com.example.deliveryapp.domain.store.controller;
 
 import com.example.deliveryapp.domain.store.dto.CreateStoreReq;
+import com.example.deliveryapp.domain.store.dto.StoreListRes;
+import com.example.deliveryapp.domain.store.dto.StoreRes;
 import com.example.deliveryapp.domain.store.enumerate.StoreCategory;
 import com.example.deliveryapp.domain.store.service.StoreService;
 import com.example.deliveryapp.global.common.ApiResponse;
 import com.example.deliveryapp.global.exception.Success;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -16,12 +20,19 @@ public class StoreController {
     private final StoreService storeService;
 
     @GetMapping("/{storeId}")
-    public ApiResponse<?> getStore(
+    public ApiResponse<StoreRes> getStore(
             @PathVariable Long storeId
     ){
-
         return ApiResponse.success(Success.GET_STORE_SUCCESS, storeService.getStore(storeId));
     }
+
+    @GetMapping("")
+    public ApiResponse<StoreListRes> getStoreList(
+            @PageableDefault(size = 10,page = 0) Pageable pageable
+    ){
+        return ApiResponse.success(Success.GET_STORE_LIST_SUCCESS, storeService.getStoreList(pageable));
+    }
+
 
     @PostMapping("")
     public ApiResponse<?> createStore(

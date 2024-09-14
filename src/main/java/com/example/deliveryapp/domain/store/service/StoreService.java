@@ -1,15 +1,20 @@
 package com.example.deliveryapp.domain.store.service;
 
 import com.example.deliveryapp.domain.store.dto.CreateStoreReq;
-import com.example.deliveryapp.domain.store.dto.GetStoreRes;
+import com.example.deliveryapp.domain.store.dto.StoreListRes;
+import com.example.deliveryapp.domain.store.dto.StoreRes;
 import com.example.deliveryapp.domain.store.entity.Store;
 import com.example.deliveryapp.domain.store.enumerate.StoreCategory;
 import com.example.deliveryapp.domain.store.repository.StoreRepository;
 import com.example.deliveryapp.global.exception.ApplicationException;
 import com.example.deliveryapp.global.exception.ErrorCode;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -48,8 +53,8 @@ public class StoreService {
     }
 
 
-    public GetStoreRes getStore(Long storeId) {
-        return GetStoreRes.of(getStoreFromRepo(storeId));
+    public StoreRes getStore(Long storeId) {
+        return StoreRes.of(getStoreFromRepo(storeId));
     }
 
 
@@ -57,5 +62,15 @@ public class StoreService {
         return storeRepository.findById(storeId).orElseThrow(
                 () -> new ApplicationException(ErrorCode.NOT_FOUND_STORE_EXCEPTION)
         );
+    }
+
+    public StoreListRes getStoreList(Pageable pageable) {
+        Page<Store> storePage = storeRepository.findAll(pageable);
+
+        return new StoreListRes(storePage.getContent().stream()
+                .map(StoreRes::of)
+                .collect(Collectors.toList())
+                ,storePage.getNumber(), storePage.getSize(), storePage.getTotalPages());
+
     }
 }
