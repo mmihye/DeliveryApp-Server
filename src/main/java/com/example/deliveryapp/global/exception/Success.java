@@ -11,12 +11,13 @@ public enum Success {
     /**
      * 201 CREATED
      */
-    CREATE_STORE_SUCCESS(HttpStatus.CREATED, "가게 생성 성공");
+    CREATE_STORE_SUCCESS(HttpStatus.CREATED, "가게 생성 성공"),
 
 
     /**
      * 200 OK
      */
+    UPDATE_STORE_SUCCESS(HttpStatus.OK, "가게 정보 수정 성공");
 
 
     /**
