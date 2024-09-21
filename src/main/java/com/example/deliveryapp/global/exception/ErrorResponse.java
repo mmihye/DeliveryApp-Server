@@ -2,7 +2,6 @@ package com.example.deliveryapp.global.exception;
 
 import java.time.LocalDateTime;
 
-
 public record ErrorResponse(
         LocalDateTime timestamp,
         Integer code,
