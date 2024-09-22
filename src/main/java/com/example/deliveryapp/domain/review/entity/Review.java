@@ -26,6 +26,9 @@ public class Review {
 
 	private String content;
 
+	@ManyToOne
+	@JoinColumn(name = "store_id")
+	private Store store;
 
 
 
