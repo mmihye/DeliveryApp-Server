@@ -9,13 +9,10 @@ import jakarta.validation.constraints.PositiveOrZero;
 public record CreateStoreParam(
 	String storeName,
 	Long deliveryTip,
-	String menuName,
-	Long menuPrice,
 	StoreCategory category
 ) {
 	public static CreateStoreParam of(CreateStoreReq createStoreReq) {
-		return new CreateStoreParam(createStoreReq.storeName(), createStoreReq.deliveryTip(), createStoreReq.menuName(),
-			createStoreReq.menuPrice(), createStoreReq.category());
+		return new CreateStoreParam(createStoreReq.storeName(), createStoreReq.deliveryTip(),createStoreReq.category());
 	}
 
 }
