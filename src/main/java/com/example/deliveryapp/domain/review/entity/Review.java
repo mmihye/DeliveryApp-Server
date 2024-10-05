@@ -3,6 +3,7 @@ package com.example.deliveryapp.domain.review.entity;
 import java.util.List;
 
 import com.example.deliveryapp.domain.store.entity.Store;
+import com.example.deliveryapp.domain.user.entity.User;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,6 +26,10 @@ public class Review {
 	private Long id;
 
 	private String content;
+
+	@ManyToOne
+	@JoinColumn(name="user_id")
+	private User user;
 
 	@ManyToOne
 	@JoinColumn(name = "store_id")
