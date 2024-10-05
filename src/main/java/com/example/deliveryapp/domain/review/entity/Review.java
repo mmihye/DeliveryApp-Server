@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.example.deliveryapp.domain.store.entity.Store;
 import com.example.deliveryapp.domain.user.entity.User;
+import com.example.deliveryapp.global.common.BaseEntity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -18,9 +19,8 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
-@Table(name = "review")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Review {
+public class Review extends BaseEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;

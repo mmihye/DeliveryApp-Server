@@ -1,6 +1,7 @@
 package com.example.deliveryapp.domain.order.entity;
 
 import com.example.deliveryapp.domain.menu.entity.Menu;
+import com.example.deliveryapp.global.common.BaseEntity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -18,18 +19,18 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class OrderMenu {
+public class OrderMenu extends BaseEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "order_menu_id", nullable = false)
 	private Long id;
 
 	@ManyToOne
-	@JoinColumn(name = "order_id")
+	@JoinColumn(name = "order_table_id")
 	private Order order;
 
 	@OneToOne
-	@JoinColumn(name = "menu_id")
+	@JoinColumn(name = "menu")
 	private Menu menu;
 
 }

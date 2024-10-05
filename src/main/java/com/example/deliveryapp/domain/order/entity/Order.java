@@ -5,6 +5,7 @@ import java.util.List;
 import com.example.deliveryapp.domain.menu.entity.Menu;
 import com.example.deliveryapp.domain.store.entity.Store;
 import com.example.deliveryapp.domain.user.entity.User;
+import com.example.deliveryapp.global.common.BaseEntity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -21,9 +22,9 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
-@Table(name = "order")
+@Table(name = "order_table")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Order {
+public class Order extends BaseEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

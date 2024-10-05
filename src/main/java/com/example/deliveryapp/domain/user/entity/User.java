@@ -1,6 +1,8 @@
 package com.example.deliveryapp.domain.user.entity;
 
 import com.example.deliveryapp.domain.store.entity.Store;
+import com.example.deliveryapp.global.common.BaseEntity;
+import com.example.deliveryapp.global.common.BaseTimeEntity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,9 +17,8 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
-@Table(name = "user")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class User {
+public class User extends BaseTimeEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
