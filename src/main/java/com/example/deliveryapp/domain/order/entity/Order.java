@@ -24,14 +24,15 @@ import lombok.NoArgsConstructor;
 @Table(name = "order")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Order {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	private Long orderPrice;
 	private String address;
-	private String requestStore;
-	private String requestRider;
+	private String storeRequest;
+	private String riderRequest;
 
 
 	@OneToOne
