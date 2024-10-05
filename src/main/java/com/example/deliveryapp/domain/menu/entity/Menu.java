@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
-@Table(name = "store")
+@Table(name = "menu")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Menu {
 	@Id
