@@ -24,17 +24,15 @@ public class StoreService {
 	public void createStore(CreateStoreParam createStoreParam) {
 		storeRepository.save(Store.builder().storeName(createStoreParam.storeName())
 			.deliveryTip(createStoreParam.deliveryTip())
-			.menuName(createStoreParam.menuName())
-			.menuPrice(createStoreParam.menuPrice())
 			.category(createStoreParam.category())
 			.build());
 	}
 
 	@Transactional
-	public void updateStore(Long storeId, String storeName, Long deliveryTip, Long menuPrice, String menuName,
+	public void updateStore(Long storeId, String storeName, Long deliveryTip,
 		StoreCategory category) {
 		Store store = getStore(storeId);
-		store.updateData(storeName, deliveryTip, menuPrice, menuName,category);
+		store.updateData(storeName, deliveryTip, category);
 	}
 
 	@Transactional

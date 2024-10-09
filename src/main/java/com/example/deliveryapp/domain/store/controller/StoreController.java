@@ -60,11 +60,9 @@ public class StoreController {
 		@PathVariable Long storeId,
 		@RequestParam(required = false) String storeName,
 		@RequestParam(required = false) Long deliveryTip,
-		@RequestParam(required = false) Long menuPrice,
-		@RequestParam(required = false) String menuName,
 		@RequestParam(required = false) StoreCategory category
 	) {
-		storeService.updateStore(storeId, storeName, deliveryTip, menuPrice, menuName, category);
+		storeService.updateStore(storeId, storeName, deliveryTip, category);
 		return ApiResponse.success(Success.SUCCESS);
 	}
 
