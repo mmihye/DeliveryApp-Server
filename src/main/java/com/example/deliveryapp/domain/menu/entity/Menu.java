@@ -1,6 +1,8 @@
 package com.example.deliveryapp.domain.menu.entity;
 
 import com.example.deliveryapp.domain.store.entity.Store;
+import com.example.deliveryapp.global.common.BaseEntity;
+import com.example.deliveryapp.global.common.BaseTimeEntity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -19,7 +21,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @Table(name = "menu")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Menu {
+public class Menu extends BaseEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;

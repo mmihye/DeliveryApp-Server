@@ -2,15 +2,15 @@ package com.example.deliveryapp.domain.store.entity;
 
 import com.example.deliveryapp.domain.menu.entity.Menu;
 import com.example.deliveryapp.domain.store.enumerate.StoreCategory;
+import com.example.deliveryapp.global.common.BaseEntity;
 
 import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
 @Getter
-@Table(name = "store")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Store {
+public class Store extends BaseEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "store_id", nullable = false)
