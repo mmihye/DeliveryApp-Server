@@ -53,9 +53,8 @@ public class StoreController {
 	@PostMapping("")
 	public ApiResponse<?> createStore(
 		@RequestBody @Valid CreateStoreReq createStoreReq,
-		@RequestHeader("Authorization") String token
+		@RequestAttribute("user") User user
 	) {
-		User user = tokenProvider.getUser(token.substring(7));
 		storeService.createStore(CreateStoreParam.of(createStoreReq), user);
 		return ApiResponse.success(Success.CREATE_SUCCESS);
 	}
