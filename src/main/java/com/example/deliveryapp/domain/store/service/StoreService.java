@@ -4,6 +4,8 @@ import com.example.deliveryapp.domain.store.dto.Param.CreateStoreParam;
 import com.example.deliveryapp.domain.store.entity.Store;
 import com.example.deliveryapp.domain.store.enumerate.StoreCategory;
 import com.example.deliveryapp.domain.store.repository.StoreRepository;
+import com.example.deliveryapp.domain.user.entity.User;
+import com.example.deliveryapp.domain.user.enumerate.UserRole;
 import com.example.deliveryapp.global.exception.ApplicationException;
 import com.example.deliveryapp.global.exception.ErrorCode;
 import com.example.deliveryapp.global.exception.ErrorResponse;
@@ -21,7 +23,10 @@ public class StoreService {
 	private final StoreRepository storeRepository;
 
 	@Transactional
-	public void createStore(CreateStoreParam createStoreParam) {
+	public void createStore(CreateStoreParam createStoreParam, User user) {
+		if(user.getRole() == UserRole.GENERAL)
+			throw new ApplicationException(ErrorCode.FORBIDDEN_EXCEPTION);
+
 		storeRepository.save(Store.builder().storeName(createStoreParam.storeName())
 			.deliveryTip(createStoreParam.deliveryTip())
 			.category(createStoreParam.category())

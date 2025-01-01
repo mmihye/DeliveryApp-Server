@@ -1,17 +1,14 @@
 package com.example.deliveryapp.domain.user.entity;
 
-import com.example.deliveryapp.domain.store.entity.Store;
-import com.example.deliveryapp.global.common.BaseEntity;
+import com.example.deliveryapp.domain.user.enumerate.UserRole;
 import com.example.deliveryapp.global.common.BaseTimeEntity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -27,5 +24,21 @@ public class User extends BaseTimeEntity {
 	private String name;
 	private String email;
 	private String phoneNumber;
+	private String refreshToken;
+	private UserRole role;
+
+	@Builder
+	public User(String nickname, String name, String email, String phoneNumber, String refreshToken, UserRole role){
+		this.nickname = nickname;
+		this.name = name;
+		this.email = email;
+		this.phoneNumber = phoneNumber;
+		this.refreshToken =refreshToken;
+		this.role = role;
+	}
+
+	public void updateRefreshToken(String refreshToken){
+		this.refreshToken = refreshToken;
+	}
 
 }

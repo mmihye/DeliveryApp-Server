@@ -10,8 +10,10 @@ import com.example.deliveryapp.domain.store.dto.Response.StoreRes;
 import com.example.deliveryapp.domain.store.entity.Store;
 import com.example.deliveryapp.domain.store.enumerate.StoreCategory;
 import com.example.deliveryapp.domain.store.service.StoreService;
+import com.example.deliveryapp.domain.user.entity.User;
 import com.example.deliveryapp.global.common.ApiResponse;
 import com.example.deliveryapp.global.exception.Success;
+import com.example.deliveryapp.global.jwt.TokenProvider;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -27,6 +29,7 @@ import org.springframework.web.bind.annotation.*;
 public class StoreController {
 
 	private final StoreService storeService;
+	private final TokenProvider tokenProvider;
 
 	@GetMapping("/{storeId}")
 	public ApiResponse<StoreRes> getStore(
@@ -49,9 +52,11 @@ public class StoreController {
 
 	@PostMapping("")
 	public ApiResponse<?> createStore(
-		@RequestBody @Valid CreateStoreReq createStoreReq
+		@RequestBody @Valid CreateStoreReq createStoreReq,
+		@RequestHeader("Authorization") String token
 	) {
-		storeService.createStore(CreateStoreParam.of(createStoreReq));
+		User user = tokenProvider.getUser(token.substring(7));
+		storeService.createStore(CreateStoreParam.of(createStoreReq), user);
 		return ApiResponse.success(Success.CREATE_SUCCESS);
 	}
 
