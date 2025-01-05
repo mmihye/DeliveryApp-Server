@@ -5,13 +5,13 @@ import lombok.Builder;
 
 @Builder
 public record LoginRes(
-        @NotNull Long memberId,
-        @NotNull String email,
-        @NotNull String name,
-        @NotNull String nickname,
-        @NotNull String phoneNumber,
-        @NotNull String accessToken,
-        @NotNull String refreshToken
+        Long memberId,
+        String email,
+        String name,
+        String nickname,
+        String phoneNumber,
+        String accessToken,
+        String refreshToken
 ){
 
 }
