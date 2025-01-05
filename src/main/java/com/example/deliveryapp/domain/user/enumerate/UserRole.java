@@ -11,4 +11,13 @@ public enum UserRole {
 
 	private final String role;
 	private final String title;
+
+	public static UserRole fromString(String roleName) {
+		for (UserRole userRole : UserRole.values()) {
+			if (userRole.name().equalsIgnoreCase(roleName)) {
+				return userRole;
+			}
+		}
+		throw new IllegalArgumentException("Unknown role: " + roleName);
+	}
 }

@@ -7,6 +7,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.example.deliveryapp.domain.user.entity.User;
+import com.example.deliveryapp.domain.user.enumerate.UserRole;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -33,8 +34,10 @@ public class JwtFilter extends OncePerRequestFilter {
 
         // 토큰이 유효한 경우, 사용자 정보를 요청 속성에 저장
         if (token != null && tokenProvider.validateToken(token)) {
-            User user = tokenProvider.getUser(token);
-            request.setAttribute("user", user);
+            String email = tokenProvider.getEmail(token);
+            String role = tokenProvider.getRole(token);
+            request.setAttribute("email", email);
+            request.setAttribute("role", role);
         }
 
         filterChain.doFilter(request, response);

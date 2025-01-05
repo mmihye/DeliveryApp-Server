@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import com.example.deliveryapp.domain.user.entity.User;
+import com.example.deliveryapp.domain.user.enumerate.UserRole;
 import com.example.deliveryapp.domain.user.repository.UserRepository;
 import com.example.deliveryapp.global.exception.ApplicationException;
 import com.example.deliveryapp.global.exception.ErrorCode;
@@ -144,6 +145,16 @@ public class TokenProvider {
     }
 
     /**
+     * 토큰에서 role 정보 반환
+     * @param token - 일반적으로 액세스 토큰 / 토큰 재발급 요청 시에는 리프레쉬 토큰이 들어옴
+     * @return 사용자의 role 반환
+     */
+    public String getRole(String token) {
+        return Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).getBody().get("role",String.class);
+    }
+
+
+    /**
      * 토큰에서 email 정보 반환
      * @param token - 일반적으로 액세스 토큰 / 토큰 재발급 요청 시에는 리프레쉬 토큰이 들어옴
      * @return 사용자의 email 반환
@@ -167,7 +178,9 @@ public class TokenProvider {
      * @return 사용자 구분 정보인 이메일을 저장한 Claims 객체 반환
      */
     private Claims getClaims(User user) {
+        Claims claims = Jwts.claims().setSubject(user.getEmail());
+        claims.put("role", user.getRole());
 
-        return Jwts.claims().setSubject(user.getEmail());
+        return claims;
     }
 }

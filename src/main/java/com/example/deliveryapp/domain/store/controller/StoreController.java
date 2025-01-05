@@ -11,10 +11,13 @@ import com.example.deliveryapp.domain.store.entity.Store;
 import com.example.deliveryapp.domain.store.enumerate.StoreCategory;
 import com.example.deliveryapp.domain.store.service.StoreService;
 import com.example.deliveryapp.domain.user.entity.User;
+import com.example.deliveryapp.domain.user.enumerate.UserRole;
 import com.example.deliveryapp.global.common.ApiResponse;
+import com.example.deliveryapp.global.common.RoleRequired;
 import com.example.deliveryapp.global.exception.Success;
 import com.example.deliveryapp.global.jwt.TokenProvider;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
@@ -50,12 +53,12 @@ public class StoreController {
 		return ApiResponse.success(Success.SUCCESS, response);
 	}
 
+	@RoleRequired(UserRole.ADMIN)
 	@PostMapping("")
 	public ApiResponse<?> createStore(
-		@RequestBody @Valid CreateStoreReq createStoreReq,
-		User user
+		@RequestBody @Valid CreateStoreReq createStoreReq
 	) {
-		storeService.createStore(CreateStoreParam.of(createStoreReq), user);
+		storeService.createStore(CreateStoreParam.of(createStoreReq));
 		return ApiResponse.success(Success.CREATE_SUCCESS);
 	}
 

@@ -25,10 +25,7 @@ public class StoreService {
 	private final StoreRepository storeRepository;
 
 	@Transactional
-	public void createStore(CreateStoreParam createStoreParam, User user) {
-		if(user.getRole() == UserRole.GENERAL)
-			throw new ApplicationException(ErrorCode.FORBIDDEN_EXCEPTION);
-
+	public void createStore(CreateStoreParam createStoreParam) {
 		storeRepository.save(Store.builder().storeName(createStoreParam.storeName())
 			.deliveryTip(createStoreParam.deliveryTip())
 			.category(createStoreParam.category())
