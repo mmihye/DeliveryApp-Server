@@ -53,7 +53,7 @@ public class StoreController {
 	@PostMapping("")
 	public ApiResponse<?> createStore(
 		@RequestBody @Valid CreateStoreReq createStoreReq,
-		@RequestHeader("user") User user
+		User user
 	) {
 		storeService.createStore(CreateStoreParam.of(createStoreReq), user);
 		return ApiResponse.success(Success.CREATE_SUCCESS);
