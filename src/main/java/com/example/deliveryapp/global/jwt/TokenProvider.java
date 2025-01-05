@@ -67,10 +67,9 @@ public class TokenProvider {
 
     /**
      * RTK 생성
-     * @param user - 사용자 정보를 추출하여 리프레쉬 토큰 생성
      * @return 생성된 리프레쉬 토큰 정보 반환
      */
-    private String createRefreshToken(User user) {
+    private String createRefreshToken() {
         Date now = new Date();
 
         return Jwts.builder()
@@ -88,7 +87,7 @@ public class TokenProvider {
     public TokenDto createToken(User user) {
         return TokenDto.builder()
                 .accessToken(createAccessToken(user))
-                .refreshToken(createRefreshToken(user))
+                .refreshToken(createRefreshToken())
                 .build();
     }
 
@@ -124,7 +123,7 @@ public class TokenProvider {
         long accessTokenExpiration = getExpiration(accessToken);
 
         if (refreshTokenExpiration - System.currentTimeMillis() <= accessTokenExpiration - System.currentTimeMillis()) {
-            refreshToken = createRefreshToken(user);
+            refreshToken = createRefreshToken();
         }
 
         return TokenDto.builder()
