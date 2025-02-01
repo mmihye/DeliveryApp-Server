@@ -39,4 +39,16 @@ public class UserController {
 		);
 	}
 
+	@GetMapping("/login")
+	public ApiResponse<LoginRes> login(
+		@RequestBody SignInReq signInReq
+	) {
+		User user = userService.signIn(SignInParam.of(signInReq));
+		TokenDto tokenDto = tokenProvider.createToken(user);
+		return ApiResponse.success(Success.CREATE_SUCCESS,
+			new LoginRes(user.getId(), user.getEmail(), user.getName(), user.getNickname(), user.getPhoneNumber(),
+				tokenDto.accessToken(), tokenDto.refreshToken())
+		);
+	}
+
 }

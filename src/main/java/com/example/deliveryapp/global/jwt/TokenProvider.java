@@ -153,7 +153,6 @@ public class TokenProvider {
         return Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).getBody().get("role",String.class);
     }
 
-
     /**
      * 토큰에서 email 정보 반환
      * @param token - 일반적으로 액세스 토큰 / 토큰 재발급 요청 시에는 리프레쉬 토큰이 들어옴
