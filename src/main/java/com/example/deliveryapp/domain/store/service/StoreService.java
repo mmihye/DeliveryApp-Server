@@ -1,9 +1,13 @@
 package com.example.deliveryapp.domain.store.service;
 
+import java.util.Objects;
+
 import com.example.deliveryapp.domain.store.dto.Param.CreateStoreParam;
 import com.example.deliveryapp.domain.store.entity.Store;
 import com.example.deliveryapp.domain.store.enumerate.StoreCategory;
 import com.example.deliveryapp.domain.store.repository.StoreRepository;
+import com.example.deliveryapp.domain.user.entity.User;
+import com.example.deliveryapp.domain.user.enumerate.UserRole;
 import com.example.deliveryapp.global.exception.ApplicationException;
 import com.example.deliveryapp.global.exception.ErrorCode;
 import com.example.deliveryapp.global.exception.ErrorResponse;

@@ -10,9 +10,14 @@ import com.example.deliveryapp.domain.store.dto.Response.StoreRes;
 import com.example.deliveryapp.domain.store.entity.Store;
 import com.example.deliveryapp.domain.store.enumerate.StoreCategory;
 import com.example.deliveryapp.domain.store.service.StoreService;
+import com.example.deliveryapp.domain.user.entity.User;
+import com.example.deliveryapp.domain.user.enumerate.UserRole;
 import com.example.deliveryapp.global.common.ApiResponse;
+import com.example.deliveryapp.global.common.RoleRequired;
 import com.example.deliveryapp.global.exception.Success;
+import com.example.deliveryapp.global.jwt.TokenProvider;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
@@ -27,6 +32,7 @@ import org.springframework.web.bind.annotation.*;
 public class StoreController {
 
 	private final StoreService storeService;
+	private final TokenProvider tokenProvider;
 
 	@GetMapping("/{storeId}")
 	public ApiResponse<StoreRes> getStore(
@@ -36,7 +42,7 @@ public class StoreController {
 		return ApiResponse.success(Success.SUCCESS, response);
 	}
 
-	@GetMapping("")
+	@GetMapping()
 	public ApiResponse<StoreListRes> getStoreList(
 		@PageableDefault(size = 10, page = 0) Pageable pageable
 	) {
@@ -47,7 +53,8 @@ public class StoreController {
 		return ApiResponse.success(Success.SUCCESS, response);
 	}
 
-	@PostMapping("")
+	@RoleRequired(UserRole.ADMIN)
+	@PostMapping()
 	public ApiResponse<?> createStore(
 		@RequestBody @Valid CreateStoreReq createStoreReq
 	) {
