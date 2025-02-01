@@ -13,6 +13,7 @@ import com.example.deliveryapp.domain.reservation.dto.Request.ReserveOrderReq;
 import com.example.deliveryapp.domain.reservation.service.OrderReservationService;
 import com.example.deliveryapp.domain.store.dto.Param.CreateStoreParam;
 import com.example.deliveryapp.global.common.ApiResponse;
+import com.example.deliveryapp.global.common.LoginUser;
 import com.example.deliveryapp.global.exception.Success;
 
 import jakarta.validation.Valid;
@@ -27,7 +28,7 @@ public class OrderReservationController {
 	@PostMapping("/orders")
 	public ApiResponse<?> reserveOrder(
 		@RequestBody @Valid ReserveOrderReq reserveOrderReq,
-		@RequestAttribute("email") String email
+		@LoginUser String email
 	) {
 		service.reserve(ReserveOrderParam.from(reserveOrderReq,email));
 		return ApiResponse.success(Success.CREATE_SUCCESS);
@@ -36,7 +37,7 @@ public class OrderReservationController {
 	@DeleteMapping("/orders/{reservationId}")
 	public ApiResponse<?> cancel(
 		@PathVariable Long reservationId,
-		@RequestAttribute("email") String email
+		@LoginUser String email
 	) {
 		service.cancel(reservationId, email);
 		return ApiResponse.success(Success.SUCCESS);
