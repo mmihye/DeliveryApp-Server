@@ -11,11 +11,10 @@ public record StoreRes(
 	String storeName,
 	Float grade,
 	Long deliveryTip,
-	StoreCategory category,
-	LocalDateTime time
+	StoreCategory category
 ) {
 	public static StoreRes of(Store store) {
 		return new StoreRes(store.getId(), store.getStoreName(), store.getGrade(), store.getDeliveryTip(),
-			store.getCategory(), LocalDateTime.now());
+			store.getCategory());
 	}
 }
