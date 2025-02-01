@@ -2,7 +2,9 @@ package com.example.deliveryapp.domain.reservation.service;
 
 import java.util.List;
 
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.deliveryapp.domain.menu.entity.Menu;
@@ -13,6 +15,7 @@ import com.example.deliveryapp.domain.order.repository.OrderMenuRepository;
 import com.example.deliveryapp.domain.order.repository.OrderRepository;
 import com.example.deliveryapp.domain.reservation.dto.Param.ReserveOrderParam;
 import com.example.deliveryapp.domain.reservation.entity.OrderReservation;
+import com.example.deliveryapp.domain.reservation.enumerate.OrderReservationStatus;
 import com.example.deliveryapp.domain.reservation.repository.OrderReservationRepository;
 import com.example.deliveryapp.domain.store.service.StoreService;
 import com.example.deliveryapp.domain.user.entity.User;
@@ -21,11 +24,9 @@ import com.example.deliveryapp.global.exception.ApplicationException;
 import com.example.deliveryapp.global.exception.ErrorCode;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
 @Service
 @RequiredArgsConstructor
-@Transactional
 public class OrderReservationService {
 
 	private final OrderReservationRepository orderReservationRepository;
@@ -35,6 +36,8 @@ public class OrderReservationService {
 	private final MenuRepository menuRepository;
 	private final OrderMenuRepository orderMenuRepository;
 
+
+	@Transactional
 	public void reserve(
 		ReserveOrderParam param
 	) {
@@ -75,5 +78,10 @@ public class OrderReservationService {
 
 		orderReservationRepository.deleteById(reservationId);
 	}
-
+	@Async
+	@Transactional(propagation = Propagation.REQUIRES_NEW)
+	public void updateReservationStatus(OrderReservation reservation) {
+		reservation.updateStatus(OrderReservationStatus.PROCESSING);
+		orderReservationRepository.save(reservation);
+	}
 }
