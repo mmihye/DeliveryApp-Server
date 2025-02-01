@@ -51,4 +51,8 @@ public class OrderReservation extends BaseTimeEntity {
 		this.user = user;
 		this.status = OrderReservationStatus.PENDING;
 	}
+
+	public void updateStatus(OrderReservationStatus status){
+		this.status = status;
+	}
 }

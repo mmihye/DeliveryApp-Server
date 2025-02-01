@@ -36,7 +36,7 @@ public class OrderMenu extends BaseEntity {
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	private Order order;
 
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "menu")
 	private Menu menu;
 	@Builder
