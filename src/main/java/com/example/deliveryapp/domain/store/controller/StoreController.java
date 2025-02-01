@@ -42,7 +42,7 @@ public class StoreController {
 		return ApiResponse.success(Success.SUCCESS, response);
 	}
 
-	@GetMapping("")
+	@GetMapping()
 	public ApiResponse<StoreListRes> getStoreList(
 		@PageableDefault(size = 10, page = 0) Pageable pageable
 	) {
@@ -54,7 +54,7 @@ public class StoreController {
 	}
 
 	@RoleRequired(UserRole.ADMIN)
-	@PostMapping("")
+	@PostMapping()
 	public ApiResponse<?> createStore(
 		@RequestBody @Valid CreateStoreReq createStoreReq
 	) {

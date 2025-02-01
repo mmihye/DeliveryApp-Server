@@ -2,6 +2,7 @@ package com.example.deliveryapp.domain.user.enumerate;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
 
 @Getter
 @RequiredArgsConstructor
@@ -14,7 +15,7 @@ public enum UserRole {
 
 	public static UserRole fromString(String roleName) {
 		for (UserRole userRole : UserRole.values()) {
-			if (userRole.name().equalsIgnoreCase(roleName)) {
+			if (StringUtils.equalsIgnoreCase(userRole.name(), roleName)) {
 				return userRole;
 			}
 		}

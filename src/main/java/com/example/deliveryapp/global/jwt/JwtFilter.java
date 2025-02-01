@@ -25,7 +25,6 @@ public class JwtFilter extends OncePerRequestFilter {
         String requestURI = request.getRequestURI();
         //jwt 유효성 검사를 하지않음
         if ("/v1/users/sign-in".equals(requestURI)) {
-
             filterChain.doFilter(request, response);
             return;
         }

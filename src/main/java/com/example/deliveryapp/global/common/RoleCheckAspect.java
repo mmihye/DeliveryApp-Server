@@ -9,17 +9,14 @@ import com.example.deliveryapp.global.exception.ApplicationException;
 import com.example.deliveryapp.global.exception.ErrorCode;
 
 import jakarta.servlet.http.HttpServletRequest;
+import lombok.RequiredArgsConstructor;
 
 @Component
 @Aspect
+@RequiredArgsConstructor
 public class RoleCheckAspect {
 
     private final HttpServletRequest request;
-
-    public RoleCheckAspect(HttpServletRequest request) {
-        this.request = request;
-    }
-
     @Before("@annotation(roleRequired)")
     public void checkRole(RoleRequired roleRequired) {
         String currentRole = (String) request.getAttribute("role");
