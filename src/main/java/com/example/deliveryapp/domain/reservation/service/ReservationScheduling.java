@@ -19,7 +19,7 @@ public class ReservationScheduling {
 	private final OrderReservationRepository orderReservationRepository;
 	private final OrderReservationService orderReservationService;
 
-	@Scheduled(cron = "0/30 * * * * *", zone = "Asia/Seoul")
+	@Scheduled(cron = "* 0/30 * * * *", zone = "Asia/Seoul")
 	public void processReservedOrder() {
 		LocalDateTime time = LocalDateTime.now().withNano(0);
 		List<OrderReservation> reservations = orderReservationRepository.findByReservationTime(time);
