@@ -78,7 +78,7 @@ public class OrderReservationService {
 
 		orderReservationRepository.deleteById(reservationId);
 	}
-	@Async
+
 	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	public void updateReservationStatus(OrderReservation reservation) {
 		reservation.updateStatus(OrderReservationStatus.PROCESSING);
