@@ -7,6 +7,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import com.example.deliveryapp.domain.reservation.entity.OrderReservation;
+import com.example.deliveryapp.domain.reservation.enumerate.OrderReservationStatus;
 import com.example.deliveryapp.domain.reservation.repository.OrderReservationRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -19,10 +20,11 @@ public class ReservationScheduling {
 	private final OrderReservationRepository orderReservationRepository;
 	private final OrderReservationService orderReservationService;
 
-	@Scheduled(cron = "* 0/30 * * * *", zone = "Asia/Seoul")
+	@Scheduled(cron = "* 0/10 * * * *", zone = "Asia/Seoul")
 	public void processReservedOrder() {
 		LocalDateTime time = LocalDateTime.now().withNano(0);
-		List<OrderReservation> reservations = orderReservationRepository.findByReservationTime(time);
+		List<OrderReservation> reservations = orderReservationRepository.findByStatusAndReservationTimeLessThanEqual(
+			OrderReservationStatus.PENDING, time);
 
 		reservations.forEach(reservation -> {
 			try {
