@@ -2,7 +2,6 @@ package com.example.deliveryapp.domain.reservation.service;
 
 import java.util.List;
 
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -57,7 +56,7 @@ public class OrderReservationService {
 			.order(order).build();
 
 		orderRepository.save(order);
-		saveOrderMenus(order, param.menuList());
+		saveOrderMenus(order, param.menuIds());
 		orderReservationRepository.save(newReservation);
 	}
 

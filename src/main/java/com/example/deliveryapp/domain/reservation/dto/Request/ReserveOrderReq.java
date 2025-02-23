@@ -9,7 +9,7 @@ import jakarta.validation.constraints.NotNull;
 
 public record ReserveOrderReq(
 	@NotEmpty(message = "메뉴를 한개 이상 주문해주세요.")
-	List<Long> menuList,
+	List<Long> menuIds,
 	@NotBlank(message = "주소는 필수 입력 값입니다.")
 	String address,
 	String storeRequest,

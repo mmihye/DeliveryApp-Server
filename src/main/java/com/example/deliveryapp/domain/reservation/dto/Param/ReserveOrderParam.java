@@ -7,7 +7,7 @@ import com.example.deliveryapp.domain.reservation.dto.Request.ReserveOrderReq;
 
 public record ReserveOrderParam(
 	String userEmail,
-	List<Long> menuList,
+	List<Long> menuIds,
 	String address,
 	LocalDateTime reservationTime,
 	String storeRequest,
@@ -17,7 +17,7 @@ public record ReserveOrderParam(
 	public static ReserveOrderParam from(ReserveOrderReq request, String userEmail) {
 		return new ReserveOrderParam(
 			userEmail,
-			request.menuList(),
+			request.menuIds(),
 			request.address(),
 			request.reservationTime(),
 			request.storeRequest(),
