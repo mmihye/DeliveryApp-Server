@@ -22,11 +22,11 @@ import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/v1/reservations")
+@RequestMapping("/v1/orders/reservations")
 public class OrderReservationController {
 	private final OrderReservationService service;
 
-	@PostMapping("/orders")
+	@PostMapping()
 	public ApiResponse<?> reserveOrder(
 		@RequestBody @Valid ReserveOrderReq reserveOrderReq,
 		@LoginUser String email
@@ -35,7 +35,7 @@ public class OrderReservationController {
 		return ApiResponse.success(Success.CREATE_SUCCESS);
 	}
 
-	@DeleteMapping("/orders/{reservationId}")
+	@DeleteMapping("/{reservationId}")
 	public ApiResponse<?> cancel(
 		@PathVariable Long reservationId,
 		@LoginUser String email
