@@ -25,12 +25,13 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/v1/reservations")
 public class OrderReservationController {
 	private final OrderReservationService service;
+
 	@PostMapping("/orders")
 	public ApiResponse<?> reserveOrder(
 		@RequestBody @Valid ReserveOrderReq reserveOrderReq,
 		@LoginUser String email
 	) {
-		service.reserve(ReserveOrderParam.from(reserveOrderReq,email));
+		service.reserve(ReserveOrderParam.from(reserveOrderReq, email));
 		return ApiResponse.success(Success.CREATE_SUCCESS);
 	}
 
