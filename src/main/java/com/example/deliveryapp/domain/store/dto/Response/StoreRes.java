@@ -1,5 +1,7 @@
 package com.example.deliveryapp.domain.store.dto.Response;
 
+import java.time.LocalDateTime;
+
 import com.example.deliveryapp.domain.store.entity.Store;
 import com.example.deliveryapp.domain.store.enumerate.StoreCategory;
 

@@ -20,8 +20,10 @@ public enum ErrorCode {
 	VALIDATION_EXCEPTION(HttpStatus.BAD_REQUEST, 2000, "유효하지 않은 요청값입니다."),
 	FORBIDDEN_EXCEPTION(HttpStatus.FORBIDDEN, 2005, "인가되지 않는 요청입니다."),
 
-	NOT_FOUND_EXCEPTION(HttpStatus.BAD_REQUEST, 4000, "요청된 값이 존재하지 않습니다.");
+	NOT_FOUND_EXCEPTION(HttpStatus.BAD_REQUEST, 4000, "요청된 값이 존재하지 않습니다."),
 
+	NOT_FOUND_STORE_EXCEPTION(HttpStatus.BAD_REQUEST, 4000, "요청된 가게가 존재하지 않습니다."),
+	NOT_FOUND_USER_EXCEPTION(HttpStatus.BAD_REQUEST, 4001, "요청한 유저가 존재하지 않습니다.");
 
 	//5000: Post Error
 

@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.example.deliveryapp.domain.menu.entity.Menu;
 import com.example.deliveryapp.domain.store.entity.Store;
+import com.example.deliveryapp.domain.store.enumerate.StoreCategory;
 import com.example.deliveryapp.domain.user.entity.User;
 import com.example.deliveryapp.global.common.BaseEntity;
 
@@ -17,6 +18,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -30,11 +32,9 @@ public class Order extends BaseEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	private Long orderPrice;
 	private String address;
 	private String storeRequest;
 	private String riderRequest;
-
 
 	@ManyToOne
 	@JoinColumn(name = "user_id")
@@ -44,4 +44,12 @@ public class Order extends BaseEntity {
 	@JoinColumn(name = "store_id")
 	private Store store;
 
+	@Builder
+	public Order(String address, String storeRequest, String riderRequest, User user, Store store) {
+		this.address = address;
+		this.storeRequest = storeRequest;
+		this.riderRequest = riderRequest;
+		this.user = user;
+		this.store = store;
+	}
 }

@@ -1,6 +1,11 @@
 package com.example.deliveryapp.domain.order.entity;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import com.example.deliveryapp.domain.menu.entity.Menu;
+import com.example.deliveryapp.domain.store.entity.Store;
+import com.example.deliveryapp.domain.user.entity.User;
 import com.example.deliveryapp.global.common.BaseEntity;
 
 import jakarta.persistence.Column;
@@ -13,6 +18,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -29,8 +35,12 @@ public class OrderMenu extends BaseEntity {
 	@JoinColumn(name = "order_table_id")
 	private Order order;
 
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "menu")
 	private Menu menu;
-
+	@Builder
+	public OrderMenu(Order order, Menu menu) {
+		this.order = order;
+		this.menu = menu;
+	}
 }
